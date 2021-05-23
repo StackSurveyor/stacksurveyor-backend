@@ -1,0 +1,15 @@
+version: '3'
+services:
+  backend:
+    container_name: stacksurveyor-backend
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    networks:
+      - stacksurveyor-network
+
+networks:
+  stacksurveyor-network:
+    driver: bridge
