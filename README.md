@@ -19,7 +19,7 @@ Once you have made modifications, here's how you build the project:
  2. Then run `mvn package -DskipTests` in order to build the project and convert it to
 a JAR file. We are using `-DskinTests` here because Docker URI's are not recognized by Maven's
     tests and they result in the tests failing when the app cannot connect to DB using Docker's URI or something else.
- 3. Once you have successfully built the project, run `docker-compose up` and/or add the `-D` flag to detach to the container.
+ 3. Once you have successfully built the project, run `sudo docker-compose up` and/or add the `-D` flag to detach to the container.
  4. Now go to `127.0.0.1:8080` and you will see the backend running.
 
 
