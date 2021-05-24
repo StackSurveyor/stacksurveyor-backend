@@ -6,20 +6,18 @@ Here's a list of technologies used at the moment:
  - JDK 8
  - Spring Boot
  - Maven
- - Docker
 
 ## Running it locally
 In order to run the backend API locally, you need to have two things installed.
-First, you need to have JDK 8, Docker, and Maven installed in order to build
+First, you need to have JDK 8, Apache Cassandra, and Maven installed in order to run
 the project.
 
 Once you have made modifications, here's how you build the project:
  1. Run `mvn install` to install all of the dependencies (You can also make your
     IDE do it).
- 2. Then run `mvn package -DskipTests` in order to build the project and convert it to
-a JAR file. We are using `-DskinTests` here because Docker URI's are not recognized by Maven's
-    tests and they result in the tests failing when the app cannot connect to DB using Docker's URI or something else.
- 3. Once you have successfully built the project, run `sudo docker-compose up` and/or add the `-D` flag to detach to the container.
+ 2. Then run `mvn package` in order to build the project and convert it to
+a JAR file.
+ 3. Once you have successfully built the project, run `java -jar target/backend-0.0.1.jar`.
  4. Now go to `127.0.0.1:8080` and you will see the backend running.
 
 

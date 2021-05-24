@@ -13,26 +13,22 @@
 //	You should have received a copy of the GNU General Public License
 //	along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-package com.stacksurveyor.backend;
+package com.stacksurveyor.backend.exceptions;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.data.cassandra.repository.config.EnableCassandraRepositories;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.Getter;
 
-@SpringBootApplication
-@RestController
-@EnableCassandraRepositories
-public class BackendApplication{
+public class BaseException extends Exception{
+    @Getter
+    private final int code;
+    @Getter
+    private final String message;
+    @Getter
+    private final int HttpStatus;
 
-	@RequestMapping("/")
-	public String home() {
-		return "Hello World";
-	}
-
-	public static void main(String[] args) {
-		SpringApplication.run(BackendApplication.class, args);
-	}
+    public BaseException(final int code, final String message, final int HttpStatus) {
+        this.code = code;
+        this.message = message;
+        this.HttpStatus = HttpStatus;
+    }
 
 }
