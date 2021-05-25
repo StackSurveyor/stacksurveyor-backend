@@ -21,15 +21,12 @@ import lombok.Data;
 
 import java.util.UUID;
 
-import lombok.NoArgsConstructor;
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.Table;
 
 
-
-@Table
 @Data
-@NoArgsConstructor
+@Table
 @AllArgsConstructor
 public class User {
     @PrimaryKey

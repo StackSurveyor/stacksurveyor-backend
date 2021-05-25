@@ -18,7 +18,7 @@ Once you have made modifications, here's how you build the project:
  2. Then run `mvn package` in order to build the project and convert it to
 a JAR file.
  3. Once you have successfully built the project, run `java -jar target/backend-0.0.1.jar`.
- 4. Now go to `127.0.0.1:8080` and you will see the backend running.
+ 4. Now go to `127.0.0.1:4040` and you will see the backend running.
 
 
 ## License
