@@ -20,7 +20,7 @@ import java.util.UUID;
 import com.stacksurveyor.backend.models.User;
 import org.springframework.data.cassandra.repository.AllowFiltering;
 import org.springframework.data.cassandra.repository.CassandraRepository;
-
+import org.springframework.stereotype.Repository;
 
 
 public interface UserRepository extends CassandraRepository<User, UUID>{

@@ -28,7 +28,6 @@ import org.springframework.data.cassandra.core.mapping.Table;
 
 @Table
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 public class User {
     @PrimaryKey
