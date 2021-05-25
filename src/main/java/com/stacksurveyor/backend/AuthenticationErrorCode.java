@@ -13,12 +13,24 @@
 //	You should have received a copy of the GNU General Public License
 //	along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-package com.stacksurveyor.backend.exceptions;
+package com.stacksurveyor.backend;
 
-import com.stacksurveyor.backend.AuthenticationErrorCode;
+/*
+ * Contains Error codes for authentication related requests.
+ * */
+public enum AuthenticationErrorCode {
+    EMAIL_NOT_VALID(0),
+    EMAIL_ALREADY_EXISTS(1),
+    PASSWORD_NOT_LONG(2),
+    USERNAME_TOO_LONG(3);
 
-public class UserException extends BaseException {
-    public UserException(final AuthenticationErrorCode code, final String message, final int HttpStatus) {
-        super(code.getErrorCode(), message, HttpStatus);
+    private final int errorCode;
+
+    AuthenticationErrorCode(int errCode) {
+        this.errorCode = errCode;
+    }
+
+    public int getErrorCode() {
+        return this.errorCode;
     }
 }
