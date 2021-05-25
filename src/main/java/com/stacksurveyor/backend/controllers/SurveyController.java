@@ -7,11 +7,9 @@ import com.stacksurveyor.backend.repositories.SurveyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @CrossOrigin
@@ -19,6 +17,15 @@ import java.util.UUID;
 public class SurveyController {
     @Autowired
     SurveyRepository surveyRepository;
+
+
+    @GetMapping("/survey/@me")
+    public ResponseEntity<List<Survey>> getAllSurveysOfUser() {
+        // TODO Change impl when JWT Authentication is completed
+        UUID userId = new UUID(2, 2);
+
+        return new ResponseEntity<>(surveyRepository.findAllByUserId(userId), HttpStatus.ACCEPTED);
+    }
 
     @PostMapping("/survey")
     public ResponseEntity<Survey> createSurvey(@RequestBody SurveyAddForm surveyAddForm) {
