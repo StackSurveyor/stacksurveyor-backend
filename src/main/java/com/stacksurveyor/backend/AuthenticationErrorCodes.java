@@ -18,7 +18,7 @@ package com.stacksurveyor.backend;
 /*
  * Contains Error codes for authentication related requests.
  * */
-public enum AuthenticationErrorCode {
+public enum AuthenticationErrorCodes {
     EMAIL_NOT_VALID(0),
     EMAIL_ALREADY_EXISTS(1),
     PASSWORD_NOT_LONG(2),
@@ -26,7 +26,7 @@ public enum AuthenticationErrorCode {
 
     private final int errorCode;
 
-    AuthenticationErrorCode(int errCode) {
+    AuthenticationErrorCodes(int errCode) {
         this.errorCode = errCode;
     }
 

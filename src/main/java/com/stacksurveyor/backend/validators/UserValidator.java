@@ -15,8 +15,8 @@
 
 package com.stacksurveyor.backend.validators;
 
-import com.stacksurveyor.backend.AuthenticationErrorCode;
-import com.stacksurveyor.backend.controllers.RegisterForm;
+import com.stacksurveyor.backend.AuthenticationErrorCodes;
+import com.stacksurveyor.backend.forms.RegisterForm;
 import com.stacksurveyor.backend.exceptions.UserException;
 
 import java.util.regex.Matcher;
@@ -28,15 +28,15 @@ public class UserValidator {
     public void validateOrThrowException() throws UserException {
 
         if (!isEmailValid(registerForm.getEmail())) {
-            throw new UserException(AuthenticationErrorCode.EMAIL_NOT_VALID, "Email is not valid", 400);
+            throw new UserException(AuthenticationErrorCodes.EMAIL_NOT_VALID, "Email is not valid", 400);
         }
 
         if (isUsernameLong(registerForm.getUsername(), 16)) {
-            throw new UserException(AuthenticationErrorCode.USERNAME_TOO_LONG, "Username should be less than 17 characters long", 400);
+            throw new UserException(AuthenticationErrorCodes.USERNAME_TOO_LONG, "Username should be less than 17 characters long", 400);
         }
 
         if (isPasswordShort(registerForm.getPassword(), 8)) {
-            throw new UserException(AuthenticationErrorCode.PASSWORD_NOT_LONG, "Password should be atleast 8 characters", 400);
+            throw new UserException(AuthenticationErrorCodes.PASSWORD_NOT_LONG, "Password should be atleast 8 characters", 400);
         }
     }
 

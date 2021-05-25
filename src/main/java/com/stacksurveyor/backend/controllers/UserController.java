@@ -16,12 +16,12 @@
 package com.stacksurveyor.backend.controllers;
 
 import com.datastax.oss.driver.api.core.uuid.Uuids;
-import com.stacksurveyor.backend.AuthenticationErrorCode;
+import com.stacksurveyor.backend.AuthenticationErrorCodes;
 import com.stacksurveyor.backend.exceptions.UserException;
+import com.stacksurveyor.backend.forms.RegisterForm;
 import com.stacksurveyor.backend.models.User;
 import com.stacksurveyor.backend.repositories.UserRepository;
 import com.stacksurveyor.backend.validators.UserValidator;
-import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,8 +29,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Objects;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /*
  * Response status codes:
@@ -55,7 +53,7 @@ public class UserController {
         new UserValidator(payload).validateOrThrowException();
 
         if (!Objects.isNull(existingUser)) {
-            throw new UserException(AuthenticationErrorCode.EMAIL_ALREADY_EXISTS, "Email already exists", 400);
+            throw new UserException(AuthenticationErrorCodes.EMAIL_ALREADY_EXISTS, "Email already exists", 400);
         }
 
         // Using Bcrypt's password encoder to hash the password

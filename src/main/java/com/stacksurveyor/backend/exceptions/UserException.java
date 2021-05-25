@@ -15,10 +15,10 @@
 
 package com.stacksurveyor.backend.exceptions;
 
-import com.stacksurveyor.backend.AuthenticationErrorCode;
+import com.stacksurveyor.backend.AuthenticationErrorCodes;
 
 public class UserException extends BaseException {
-    public UserException(final AuthenticationErrorCode code, final String message, final int HttpStatus) {
+    public UserException(final AuthenticationErrorCodes code, final String message, final int HttpStatus) {
         super(code.getErrorCode(), message, HttpStatus);
     }
 }
