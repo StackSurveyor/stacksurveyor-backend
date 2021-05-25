@@ -1,6 +1,8 @@
 package com.stacksurveyor.backend.controllers;
 
 import com.datastax.oss.driver.api.core.uuid.Uuids;
+import com.stacksurveyor.backend.SurveyErrorCodes;
+import com.stacksurveyor.backend.exceptions.SurveyException;
 import com.stacksurveyor.backend.forms.SurveyAddForm;
 import com.stacksurveyor.backend.models.Survey;
 import com.stacksurveyor.backend.repositories.SurveyRepository;
@@ -40,6 +42,19 @@ public class SurveyController {
         return new ResponseEntity<>(
                 survey,
                 HttpStatus.CREATED
+        );
+    }
+
+    @GetMapping(value = "/survey/{id}")
+    public ResponseEntity<Survey> getSurvey(@PathVariable("id") UUID id) throws SurveyException {
+        Survey survey = surveyRepository.findSurveyById(id);
+
+        if (survey == null) {
+            throw new SurveyException(SurveyErrorCodes.SURVEY_NOT_EXIST, "Survey does not exist", 400);
+        }
+
+        return new ResponseEntity<>(
+                survey, HttpStatus.ACCEPTED
         );
     }
 

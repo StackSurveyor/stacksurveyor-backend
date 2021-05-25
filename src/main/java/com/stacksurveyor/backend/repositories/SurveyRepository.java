@@ -10,4 +10,7 @@ import java.util.UUID;
 public interface SurveyRepository extends CassandraRepository<Survey, UUID> {
     @AllowFiltering
     List<Survey> findAllByUserId(UUID userId);
+
+    @AllowFiltering
+    Survey findSurveyById(UUID id);
 }
