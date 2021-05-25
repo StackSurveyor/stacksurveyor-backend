@@ -13,12 +13,13 @@
 //	You should have received a copy of the GNU General Public License
 //	along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-package com.stacksurveyor.backend.exceptions;
+package com.stacksurveyor.backend.forms;
 
-import com.stacksurveyor.backend.AuthenticationErrorCodes;
+import lombok.Data;
 
-public class UserException extends BaseException {
-    public UserException(final AuthenticationErrorCodes code, final String message, final int HttpStatus) {
-        super(code.getErrorCode(), message, HttpStatus);
-    }
+@Data
+public class RegisterForm {
+    private String username;
+    private String email;
+    private String password;
 }

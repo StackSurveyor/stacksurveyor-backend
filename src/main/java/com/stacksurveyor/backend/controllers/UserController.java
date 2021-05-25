@@ -16,10 +16,12 @@
 package com.stacksurveyor.backend.controllers;
 
 import com.datastax.oss.driver.api.core.uuid.Uuids;
+import com.stacksurveyor.backend.AuthenticationErrorCodes;
 import com.stacksurveyor.backend.exceptions.UserException;
+import com.stacksurveyor.backend.forms.RegisterForm;
 import com.stacksurveyor.backend.models.User;
 import com.stacksurveyor.backend.repositories.UserRepository;
-import lombok.Data;
+import com.stacksurveyor.backend.validators.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,19 +30,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Objects;
 
-@Data
-class RegisterForm {
-    private String username;
-    private String email;
-    private String password;
-}
-
 /*
-* Response status codes:
-*   1: Email already exists
-*   2: Password is less than 8 characters
-*   3: Invalid credentials
-* */
+ * Response status codes:
+ *   1: Email already exists
+ *   2: Password is less than 8 characters
+ *   3: Invalid credentials
+ * */
 
 @CrossOrigin
 @RestController
@@ -52,10 +47,13 @@ public class UserController {
 
     @PostMapping("/users/register")
     public ResponseEntity<User> registerUser(@RequestBody RegisterForm payload) throws UserException {
-        // API endpoint used to register new users
         User existingUser = userRepository.findByEmail(payload.getEmail());
+
+        // Validate the RegisterForm. Throws UserException with relevant information
+        new UserValidator(payload).validateOrThrowException();
+
         if (!Objects.isNull(existingUser)) {
-            throw new UserException(1, "Email already exists", 400);
+            throw new UserException(AuthenticationErrorCodes.EMAIL_ALREADY_EXISTS, "Email already exists", 400);
         }
 
         // Using Bcrypt's password encoder to hash the password
@@ -67,4 +65,5 @@ public class UserController {
         // Returning HTTP response with newly created user object
         return new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }
+
 }
