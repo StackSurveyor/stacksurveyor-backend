@@ -15,7 +15,7 @@
 
 package com.stacksurveyor.backend.exceptions;
 
-import com.stacksurveyor.backend.utils.AuthenticationErrorCodes;
+import com.stacksurveyor.backend.utils.errors.AuthenticationErrorCodes;
 
 public class UserException extends BaseException {
     public UserException(final AuthenticationErrorCodes code, final String message, final int HttpStatus) {

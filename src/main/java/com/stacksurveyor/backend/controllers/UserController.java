@@ -16,7 +16,7 @@
 package com.stacksurveyor.backend.controllers;
 
 import com.datastax.oss.driver.api.core.uuid.Uuids;
-import com.stacksurveyor.backend.utils.AuthenticationErrorCodes;
+import com.stacksurveyor.backend.utils.errors.AuthenticationErrorCodes;
 import com.stacksurveyor.backend.exceptions.UserException;
 import com.stacksurveyor.backend.structs.requests.RegisterForm;
 import com.stacksurveyor.backend.models.User;

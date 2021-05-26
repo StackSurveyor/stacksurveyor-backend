@@ -16,7 +16,7 @@
 package com.stacksurveyor.backend.controllers;
 
 import com.datastax.oss.driver.api.core.uuid.Uuids;
-import com.stacksurveyor.backend.utils.SurveyErrorCodes;
+import com.stacksurveyor.backend.utils.errors.SurveyErrorCodes;
 import com.stacksurveyor.backend.exceptions.SurveyException;
 import com.stacksurveyor.backend.structs.requests.SurveyCreateForm;
 import com.stacksurveyor.backend.models.Survey;
@@ -31,11 +31,12 @@ import java.util.UUID;
 
 @CrossOrigin
 @RestController
+@RequestMapping("/surveys")
 public class SurveyController {
     @Autowired
     SurveyRepository surveyRepository;
 
-    @GetMapping("/surveys/@me")
+    @GetMapping("/@me")
     public ResponseEntity<List<Survey>> getAllSurveysOfUser() {
         // TODO Change impl when JWT Authentication is completed
         UUID userId = new UUID(2, 2);
@@ -43,7 +44,7 @@ public class SurveyController {
         return new ResponseEntity<>(surveyRepository.findAllByUserId(userId), HttpStatus.OK);
     }
 
-    @PostMapping("/surveys/create")
+    @PostMapping("/create")
     public ResponseEntity<Survey> createSurvey(@RequestBody SurveyCreateForm surveyCreateFormForm) {
         // TODO Change impl when JWT Authentication is completed
         UUID userId = new UUID(2, 2);
@@ -57,7 +58,7 @@ public class SurveyController {
         );
     }
 
-    @GetMapping(value = "/surveys/{id}")
+    @GetMapping(value = "/{id}")
     public ResponseEntity<Survey> getSurvey(@PathVariable("id") String id) throws SurveyException {
         Survey survey = surveyRepository.findSurveyById(UUID.fromString(id));
 

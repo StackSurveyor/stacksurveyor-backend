@@ -15,7 +15,7 @@
 
 package com.stacksurveyor.backend.validators;
 
-import com.stacksurveyor.backend.utils.AuthenticationErrorCodes;
+import com.stacksurveyor.backend.utils.errors.AuthenticationErrorCodes;
 import com.stacksurveyor.backend.structs.requests.RegisterForm;
 import com.stacksurveyor.backend.exceptions.UserException;
 
