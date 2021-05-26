@@ -13,12 +13,21 @@
 //	You should have received a copy of the GNU General Public License
 //	along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-package com.stacksurveyor.backend.exceptions;
+package com.stacksurveyor.backend.utils;
 
-import com.stacksurveyor.backend.utils.errors.AuthenticationErrorCodes;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
 
-public class UserException extends BaseException {
-    public UserException(final AuthenticationErrorCodes code, final String message, final int HttpStatus) {
-        super(code.getErrorCode(), message, HttpStatus);
+@Service
+public class PasswordUtils {
+
+    private static final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(12);
+
+    public static String encodePassword(String plainPassword) {
+        return passwordEncoder.encode(plainPassword);
+    }
+
+    public static Boolean doPasswordsMatch(String plainPassword, String encodedPassword) {
+        return passwordEncoder.matches(plainPassword, encodedPassword);
     }
 }

@@ -13,12 +13,18 @@
 //	You should have received a copy of the GNU General Public License
 //	along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-package com.stacksurveyor.backend.exceptions;
+package com.stacksurveyor.backend.utils.errors;
 
-import com.stacksurveyor.backend.utils.errors.AuthenticationErrorCodes;
+public enum SurveyErrorCodes {
+    SURVEY_NOT_EXIST(0);
 
-public class UserException extends BaseException {
-    public UserException(final AuthenticationErrorCodes code, final String message, final int HttpStatus) {
-        super(code.getErrorCode(), message, HttpStatus);
+    private final int errCode;
+
+    SurveyErrorCodes(int e) {
+        this.errCode = e;
+    }
+
+    public int getErrorCode() {
+        return errCode;
     }
 }

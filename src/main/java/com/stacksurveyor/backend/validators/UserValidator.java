@@ -15,8 +15,8 @@
 
 package com.stacksurveyor.backend.validators;
 
-import com.stacksurveyor.backend.AuthenticationErrorCodes;
-import com.stacksurveyor.backend.forms.RegisterForm;
+import com.stacksurveyor.backend.utils.errors.AuthenticationErrorCodes;
+import com.stacksurveyor.backend.structs.requests.RegisterForm;
 import com.stacksurveyor.backend.exceptions.UserException;
 
 import java.util.regex.Matcher;
@@ -25,7 +25,10 @@ import java.util.regex.Pattern;
 public class UserValidator {
     RegisterForm registerForm;
 
-    public void validateOrThrowException() throws UserException {
+    public void validateRegisterOrThrowException() throws UserException {
+        if (registerForm.getEmail().isEmpty() || registerForm.getUsername().isEmpty() || registerForm.getPassword().isEmpty()) {
+            throw new UserException(AuthenticationErrorCodes.INVALID_INPUT, "Empty Fields", 400);
+        }
 
         if (!isEmailValid(registerForm.getEmail())) {
             throw new UserException(AuthenticationErrorCodes.EMAIL_NOT_VALID, "Email is not valid", 400);

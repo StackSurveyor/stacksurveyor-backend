@@ -16,9 +16,9 @@
 package com.stacksurveyor.backend.controllers;
 
 import com.datastax.oss.driver.api.core.uuid.Uuids;
-import com.stacksurveyor.backend.SurveyErrorCodes;
+import com.stacksurveyor.backend.utils.errors.SurveyErrorCodes;
 import com.stacksurveyor.backend.exceptions.SurveyException;
-import com.stacksurveyor.backend.forms.SurveyAddForm;
+import com.stacksurveyor.backend.structs.requests.SurveyCreateForm;
 import com.stacksurveyor.backend.models.Survey;
 import com.stacksurveyor.backend.repositories.SurveyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,28 +31,26 @@ import java.util.UUID;
 
 @CrossOrigin
 @RestController
+@RequestMapping("/surveys")
 public class SurveyController {
     @Autowired
     SurveyRepository surveyRepository;
 
-
-    @GetMapping("/survey/@me")
+    @GetMapping("/@me")
     public ResponseEntity<List<Survey>> getAllSurveysOfUser() {
         // TODO Change impl when JWT Authentication is completed
         UUID userId = new UUID(2, 2);
 
-        return new ResponseEntity<>(surveyRepository.findAllByUserId(userId), HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(surveyRepository.findAllByUserId(userId), HttpStatus.OK);
     }
 
-    @PostMapping("/survey")
-    public ResponseEntity<Survey> createSurvey(@RequestBody SurveyAddForm surveyAddForm) {
+    @PostMapping("/create")
+    public ResponseEntity<Survey> createSurvey(@RequestBody SurveyCreateForm surveyCreateFormForm) {
         // TODO Change impl when JWT Authentication is completed
         UUID userId = new UUID(2, 2);
 
-        Survey survey = new Survey(Uuids.timeBased(), userId,
-                surveyAddForm.getTitle(), surveyAddForm.getDescription());
-
-        surveyRepository.save(survey);
+        Survey survey = surveyRepository.save(new Survey(Uuids.timeBased(), userId,
+                surveyCreateFormForm.getTitle(), surveyCreateFormForm.getDescription()));
 
         return new ResponseEntity<>(
                 survey,
@@ -60,16 +58,16 @@ public class SurveyController {
         );
     }
 
-    @GetMapping(value = "/survey/{id}")
-    public ResponseEntity<Survey> getSurvey(@PathVariable("id") UUID id) throws SurveyException {
-        Survey survey = surveyRepository.findSurveyById(id);
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Survey> getSurvey(@PathVariable("id") String id) throws SurveyException {
+        Survey survey = surveyRepository.findSurveyById(UUID.fromString(id));
 
         if (survey == null) {
             throw new SurveyException(SurveyErrorCodes.SURVEY_NOT_EXIST, "Survey does not exist", 400);
         }
 
         return new ResponseEntity<>(
-                survey, HttpStatus.ACCEPTED
+                survey, HttpStatus.OK
         );
     }
 

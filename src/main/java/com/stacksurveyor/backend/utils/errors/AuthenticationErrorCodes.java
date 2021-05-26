@@ -13,18 +13,26 @@
 //	You should have received a copy of the GNU General Public License
 //	along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-package com.stacksurveyor.backend;
+package com.stacksurveyor.backend.utils.errors;
 
-public enum SurveyErrorCodes {
-    SURVEY_NOT_EXIST(0);
+/*
+ * Contains Error codes for authentication related requests.
+ * */
+public enum AuthenticationErrorCodes {
+    EMAIL_NOT_VALID(0),
+    EMAIL_ALREADY_EXISTS(1),
+    PASSWORD_NOT_LONG(2),
+    USERNAME_TOO_LONG(3),
+    WRONG_CREDENTIALS(4),
+    INVALID_INPUT(5);
 
-    private final int errCode;
+    private final int errorCode;
 
-    SurveyErrorCodes(int e) {
-        this.errCode = e;
+    AuthenticationErrorCodes(int errCode) {
+        this.errorCode = errCode;
     }
 
     public int getErrorCode() {
-        return errCode;
+        return this.errorCode;
     }
 }
