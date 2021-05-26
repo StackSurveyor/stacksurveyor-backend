@@ -16,7 +16,7 @@
 package com.stacksurveyor.backend.controllers;
 
 import com.datastax.oss.driver.api.core.uuid.Uuids;
-import com.stacksurveyor.backend.SurveyErrorCodes;
+import com.stacksurveyor.backend.utils.SurveyErrorCodes;
 import com.stacksurveyor.backend.exceptions.SurveyException;
 import com.stacksurveyor.backend.structs.requests.SurveyCreateForm;
 import com.stacksurveyor.backend.models.Survey;
@@ -34,7 +34,6 @@ import java.util.UUID;
 public class SurveyController {
     @Autowired
     SurveyRepository surveyRepository;
-
 
     @GetMapping("/surveys/@me")
     public ResponseEntity<List<Survey>> getAllSurveysOfUser() {
