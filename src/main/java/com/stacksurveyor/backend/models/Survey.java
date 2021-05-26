@@ -15,7 +15,6 @@
 
 package com.stacksurveyor.backend.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
@@ -23,24 +22,14 @@ import org.springframework.data.cassandra.core.mapping.Table;
 
 import java.util.UUID;
 
-
 @Table
 @Data
 @AllArgsConstructor
-public class User {
+public class Survey {
     @PrimaryKey
     private UUID id;
 
-    private String username;
-    private String email;
-
-    @JsonIgnore
-    // Making the response JSON deserializer ignore this field because we don't want to return the password
-    // in the JSON response.
-    private String password;
-
-    @Override
-    public String toString() {
-        return "User [id=" + id + ", username=" + username + ", email=" + email + "]";
-    }
+    private UUID userId;
+    private String title;
+    private String description;
 }
