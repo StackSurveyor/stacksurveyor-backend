@@ -13,12 +13,16 @@ First, you need to have JDK 8, Apache Cassandra, and Maven installed in order to
 the project.
 
 Once you have made modifications, here's how you build the project:
- 1. Run `mvn install` to install all of the dependencies (You can also make your
+ 1. Rename `application.example.properties` to `application.properties` and fill in the credentials. This can be found at
+    `src/main/resources`.
+ 2. Open `cqlsh` and run `CREATE KEYSPACE stacksurveyor WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 3 };` to create
+    a keyspace for the API.
+ 3. Run `mvn install` to install all of the dependencies (You can also make your
     IDE do it).
- 2. Then run `mvn package` in order to build the project and convert it to
+ 4. Then run `mvn package` in order to build the project and convert it to
 a JAR file.
- 3. Once you have successfully built the project, run `java -jar target/backend-0.0.1.jar`.
- 4. Now go to `127.0.0.1:4040` and you will see the backend running.
+ 5. Once you have successfully built the project, run `java -jar target/backend-0.0.1.jar`.
+ 6. Now go to `127.0.0.1:4040` and you will see the backend running.
 
 
 ## License

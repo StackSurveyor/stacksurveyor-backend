@@ -13,13 +13,26 @@
 //	You should have received a copy of the GNU General Public License
 //	along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-package com.stacksurveyor.backend.forms;
+package com.stacksurveyor.backend.utils;
 
-import lombok.Data;
+/*
+ * Contains Error codes for authentication related requests.
+ * */
+public enum AuthenticationErrorCodes {
+    EMAIL_NOT_VALID(0),
+    EMAIL_ALREADY_EXISTS(1),
+    PASSWORD_NOT_LONG(2),
+    USERNAME_TOO_LONG(3),
+    WRONG_CREDENTIALS(4),
+    INVALID_INPUT(5);
 
-@Data
-public class RegisterForm {
-    private String username;
-    private String email;
-    private String password;
+    private final int errorCode;
+
+    AuthenticationErrorCodes(int errCode) {
+        this.errorCode = errCode;
+    }
+
+    public int getErrorCode() {
+        return this.errorCode;
+    }
 }

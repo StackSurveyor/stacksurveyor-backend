@@ -13,12 +13,13 @@
 //	You should have received a copy of the GNU General Public License
 //	along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-package com.stacksurveyor.backend.forms;
+package com.stacksurveyor.backend.structs.requests;
 
 import lombok.Data;
 
 @Data
-public class SurveyAddForm {
-    private String title;
-    private String description;
+public class RegisterForm {
+    private String username;
+    private String email;
+    private String password;
 }
